@@ -4439,6 +4439,7 @@ uint32_t SurfaceFlinger::setClientStateLocked(const FrameTimelineInfo& frameTime
         }
         return 0;
     }
+    MUTEX_ALIAS(mStateLock, layer->mFlinger->mStateLock);
 
     // Only set by BLAST adapter layers
     if (what & layer_state_t::eProducerDisconnect) {
@@ -7363,6 +7364,7 @@ void SurfaceFlinger::handleLayerCreatedLocked(const LayerCreatedState& state) {
         ALOGD("Layer was destroyed soon after creation %p", state.layer.unsafe_get());
         return;
     }
+    MUTEX_ALIAS(mStateLock, layer->mFlinger->mStateLock);
 
     sp<Layer> parent;
     bool addToRoot = state.addToRoot;
